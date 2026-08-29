@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="SiteScope — демонстрационный интерфейс анализа структуры сайта." />
+    <meta name="theme-color" content="#f5f7f2" />
+    <link rel="icon" href="data:," />
+    <title>SiteScope — карта сайта за несколько минут</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body data-page="home">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="SiteScope — на главную">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>SiteScope</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span><span class="sr-only">Открыть меню</span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
+        <a class="active" href="/">Главная</a>
+        <a href="/analyzer.html">Анализатор</a>
+        <a href="/workflow.html">Как это работает</a>
+        <a href="/about.html">О проекте</a>
+      </nav>
+      <a class="header-cta" href="/analyzer.html">Попробовать демо <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero section-shell">
+        <div class="eyebrow"><span></span> Учебный AI-проект · Work 2</div>
+        <h1>Увидьте сайт<br />как <em>систему.</em></h1>
+        <p class="hero-copy">Введите адрес сайта, чтобы собрать страницы, понять их назначение и представить связи в простой визуальной карте.</p>
+
+        <form class="url-form" data-url-form>
+          <label class="sr-only" for="home-url">Адрес сайта</label>
+          <span class="input-prefix" aria-hidden="true">⌁</span>
+          <input id="home-url" name="url" type="url" inputmode="url" placeholder="https://example.com" required />
+          <button type="submit">Построить карту <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="form-note">Сейчас доступен демонстрационный режим — без вызовов внешних API.</p>
+
+        <div class="hero-meta" aria-label="Особенности проекта">
+          <span><b>01</b> Карта страниц</span>
+          <span><b>02</b> AI-анализ</span>
+          <span><b>03</b> Понятный результат</span>
+        </div>
+
+        <div class="map-preview" aria-label="Пример карты сайта">
+          <div class="map-toolbar">
+            <div><span class="status-dot"></span> example.com</div>
+            <span>12 страниц · 3 уровня</span>
+          </div>
+          <div class="map-canvas">
+            <div class="map-orbit orbit-one"></div>
+            <div class="map-orbit orbit-two"></div>
+            <div class="map-node node-root"><small>Главная</small><strong>example.com</strong></div>
+            <div class="map-line line-a"></div>
+            <div class="map-line line-b"></div>
+            <div class="map-line line-c"></div>
+            <div class="map-node node-a"><small>Раздел</small><strong>Продукты</strong><span>4 страницы</span></div>
+            <div class="map-node node-b"><small>Раздел</small><strong>Блог</strong><span>5 страниц</span></div>
+            <div class="map-node node-c"><small>Страница</small><strong>О компании</strong><span>1 страница</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="benefits section-shell">
+        <div class="section-heading">
+          <div><span class="section-number">01</span><span class="kicker">Что вы получите</span></div>
+          <h2>От списка ссылок<br />к ясной картине.</h2>
+        </div>
+        <div class="benefit-grid">
+          <article class="benefit-card featured">
+            <span class="card-index">A</span>
+            <div class="mini-tree" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <h3>Структура страниц</h3>
+            <p>Иерархия разделов с адресами, названиями и уровнем вложенности.</p>
+            <a href="/analyzer.html">Открыть пример <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="benefit-card">
+            <span class="card-index">B</span>
+            <div class="metric"><strong>92%</strong><span>страниц<br />распознано</span></div>
+            <h3>Краткий AI-обзор</h3>
+            <p>Модель объясняет назначение сайта и группирует близкие по смыслу страницы.</p>
+            <a href="/workflow.html">Посмотреть процесс <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="benefit-card dark-card">
+            <span class="card-index">C</span>
+            <div class="signal-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <h3>Полезные наблюдения</h3>
+            <p>Отдельно показаны глубина структуры, типы страниц и возможные пробелы.</p>
+            <a href="/about.html">О проекте <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="process-strip">
+        <div class="section-shell">
+          <span>URL пользователя</span><i>→</i><span>Apify Actor</span><i>→</i><span>OpenRouter</span><i>→</i><span>LLM-анализ</span><i>→</i><span>Карта сайта</span>
+        </div>
+      </section>
+
+      <section class="cta-section section-shell">
+        <div>
+          <span class="section-number">02</span>
+          <p>Оцените интерфейс до подключения интеграций</p>
+        </div>
+        <h2>Готовы посмотреть<br />демонстрацию?</h2>
+        <a class="round-link" href="/analyzer.html" aria-label="Перейти к демонстрации"><span>Перейти</span><b>↗</b></a>
+      </section>
+    </main>
+
+    <footer class="site-footer section-shell">
+      <a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>SiteScope</span></a>
+      <p>Учебный шаблон сервиса анализа структуры сайтов.</p>
+      <div><a href="/workflow.html">Процесс</a><a href="/about.html">О проекте</a></div>
+      <span>© 2026</span>
+    </footer>
+  </body>
+</html>
