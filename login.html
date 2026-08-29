@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Вход в закрытый учебный сервис SiteScope." />
+    <meta name="theme-color" content="#17231d" />
+    <link rel="icon" href="data:," />
+    <title>Вход — SiteScope</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <script src="/assets/login.js" defer></script>
+  </head>
+  <body class="login-page">
+    <main class="login-shell">
+      <section class="login-intro" aria-label="О сервисе">
+        <a class="brand login-brand" href="/login.html" aria-label="SiteScope">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>SiteScope</span>
+        </a>
+        <div>
+          <div class="eyebrow light-eyebrow"><span></span> Закрытый доступ</div>
+          <h1>Увидьте сайт<br />как <em>систему.</em></h1>
+          <p>Учебный сервис построения структуры сайта с будущими интеграциями Apify и OpenRouter.</p>
+        </div>
+        <span class="login-meta">Work 2 · 2026</span>
+      </section>
+
+      <section class="login-panel">
+        <div class="login-card">
+          <span class="login-index">01 / Авторизация</span>
+          <h2>Добро пожаловать</h2>
+          <p>Введите пароль, предоставленный владельцем проекта.</p>
+
+          <form class="login-form" id="login-form">
+            <label for="password">Пароль</label>
+            <div class="password-field">
+              <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Введите пароль" required autofocus />
+              <button type="button" id="toggle-password" aria-label="Показать пароль" aria-pressed="false">Показать</button>
+            </div>
+            <p class="login-error" id="login-error" role="alert" hidden></p>
+            <button class="login-submit" type="submit">
+              <span>Войти в сервис</span><b aria-hidden="true">→</b>
+            </button>
+          </form>
+
+          <div class="login-security"><i aria-hidden="true">✓</i><span><strong>Защищённая сессия</strong>Пароль проверяется на сервере и не сохраняется в браузере.</span></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
