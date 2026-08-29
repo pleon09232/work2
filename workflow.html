@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Архитектура учебного проекта SiteScope." />
+    <meta name="theme-color" content="#17231d" />
+    <link rel="icon" href="data:," />
+    <title>Как это работает — SiteScope</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body data-page="workflow">
+    <header class="site-header dark-header">
+      <a class="brand" href="/" aria-label="SiteScope — на главную"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>SiteScope</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span><span class="sr-only">Открыть меню</span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Основная навигация"><a href="/">Главная</a><a href="/analyzer.html">Анализатор</a><a class="active" href="/workflow.html">Как это работает</a><a href="/about.html">О проекте</a></nav>
+      <a class="header-cta light" href="/analyzer.html">Открыть демо <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="workflow-hero">
+        <div class="section-shell">
+          <nav class="breadcrumbs light-breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span>/</span><span>Как это работает</span></nav>
+          <div class="eyebrow light-eyebrow"><span></span> Архитектура проекта</div>
+          <h1>Пять шагов<br />от URL до <em>карты.</em></h1>
+          <p>Понятная цепочка сервисов без передачи секретных ключей в браузер.</p>
+        </div>
+      </section>
+
+      <section class="workflow-content section-shell">
+        <div class="workflow-steps">
+          <article><span>01</span><div><b>Ввод адреса</b><h2>Пользователь отправляет URL</h2><p>Форма проверяет формат адреса и передаёт его серверному маршруту Vercel.</p></div><i>URL</i></article>
+          <article><span>02</span><div><b>Сбор данных</b><h2>Apify обходит публичные страницы</h2><p>Actor получает страницы, внутренние ссылки, заголовки и глубину переходов.</p></div><i>API</i></article>
+          <article><span>03</span><div><b>Подготовка</b><h2>Данные очищаются и сокращаются</h2><p>Сервер убирает повторы и формирует компактный набор для языковой модели.</p></div><i>JSON</i></article>
+          <article><span>04</span><div><b>AI-анализ</b><h2>OpenRouter направляет запрос к LLM</h2><p>Модель группирует страницы и возвращает результат по заданной JSON-схеме.</p></div><i>LLM</i></article>
+          <article><span>05</span><div><b>Интерфейс</b><h2>Сайт показывает структуру</h2><p>Пользователь раскрывает разделы, читает обзор и изучает найденные связи.</p></div><i>UI</i></article>
+        </div>
+
+        <aside class="architecture-card">
+          <span class="aside-label">Будущая конфигурация</span>
+          <h3>Три закрытые переменные</h3>
+          <div class="code-list"><code>APIFY_API_TOKEN</code><code>OPENROUTER_API_KEY</code><code>OPENROUTER_MODEL</code></div>
+          <p>Значения будут храниться только в настройках окружения Vercel.</p>
+          <a href="/about.html">Подробнее о шаблоне <span>→</span></a>
+        </aside>
+      </section>
+
+      <section class="workflow-cta section-shell"><div><span>Следующий экран</span><h2>Посмотрите, как будет выглядеть результат.</h2></div><a href="/analyzer.html">Открыть анализатор <b>↗</b></a></section>
+    </main>
+
+    <footer class="site-footer section-shell"><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>SiteScope</span></a><p>Учебный шаблон сервиса анализа структуры сайтов.</p><div><a href="/analyzer.html">Анализатор</a><a href="/about.html">О проекте</a></div><span>© 2026</span></footer>
+  </body>
+</html>
