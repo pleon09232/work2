@@ -1,4 +1,11 @@
 (function () {
+  const logoutForm = document.createElement('form');
+  logoutForm.className = 'logout-chip';
+  logoutForm.method = 'post';
+  logoutForm.action = '/api/logout';
+  logoutForm.innerHTML = '<button type="submit"><span aria-hidden="true">↪</span> Выйти</button>';
+  document.body.appendChild(logoutForm);
+
   const menuButton = document.querySelector('.menu-toggle');
   const navigation = document.querySelector('.site-nav');
 
