@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Демонстрация анализатора структуры сайта SiteScope." />
+    <meta name="description" content="SiteScope собирает структуру сайта и готовит AI-анализ контента и SEO." />
     <meta name="theme-color" content="#f5f7f2" />
     <link rel="icon" href="data:," />
     <title>Анализатор — SiteScope</title>
@@ -15,70 +15,85 @@
       <a class="brand" href="/" aria-label="SiteScope — на главную"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>SiteScope</span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span><span class="sr-only">Открыть меню</span></button>
       <nav class="site-nav" id="site-nav" aria-label="Основная навигация"><a href="/">Главная</a><a class="active" href="/analyzer.html">Анализатор</a><a href="/workflow.html">Как это работает</a><a href="/about.html">О проекте</a></nav>
-      <a class="header-cta" href="/about.html">О шаблоне <span aria-hidden="true">↗</span></a>
+      <a class="header-cta" href="/workflow.html">Архитектура <span aria-hidden="true">↗</span></a>
     </header>
 
     <main class="inner-page section-shell">
       <nav class="breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span>/</span><span>Анализатор</span></nav>
       <section class="analyzer-intro">
-        <div><div class="eyebrow"><span></span> Демо-интерфейс</div><h1>Постройте карту<br /><em>любого сайта.</em></h1></div>
-        <p>Введите адрес и запустите демонстрацию. Мы покажем, как будет выглядеть результат после подключения Apify и OpenRouter.</p>
+        <div><div class="eyebrow"><span></span> Рабочий анализатор</div><h1>Разберите сайт<br /><em>по слоям.</em></h1></div>
+        <p>SiteScope обходит страницы через Apify, восстанавливает карту переходов и передаёт контент модели DeepSeek для оценки структуры, содержания и SEO.</p>
       </section>
 
       <section class="analyzer-panel">
         <form class="analysis-form" id="analysis-form">
           <div class="field-group">
-            <label for="analysis-url">Адрес сайта</label>
-            <div class="field-row"><span>https://</span><input id="analysis-url" name="url" type="text" placeholder="example.com" autocomplete="url" required /></div>
+            <label for="analysis-url">Адрес публичного сайта</label>
+            <div class="field-row"><span>https://</span><input id="analysis-url" name="url" type="text" placeholder="www.purovik.ru" autocomplete="url" required /></div>
           </div>
           <div class="form-options">
-            <div><span class="option-label">Глубина анализа</span><div class="segmented" role="group" aria-label="Глубина анализа"><button type="button" data-depth="1">1 уровень</button><button type="button" class="selected" data-depth="3">3 уровня</button><button type="button" data-depth="5">5 уровней</button></div></div>
-            <label class="switch-label"><input type="checkbox" checked /><span class="switch"></span><span>Добавить AI-обзор</span></label>
+            <div><span class="option-label">Глубина обхода</span><div class="segmented" role="group" aria-label="Глубина обхода"><button type="button" data-depth="1">1 уровень</button><button type="button" class="selected" data-depth="3">3 уровня</button><button type="button" data-depth="5">5 уровней</button></div></div>
+            <div class="ai-enabled"><span class="status-dot"></span><span><strong>AI-анализ включён</strong><small>DeepSeek V4 Flash 0731</small></span></div>
           </div>
-          <button class="primary-action" type="submit"><span>Запустить демо-анализ</span><b aria-hidden="true">→</b></button>
-          <p class="demo-disclaimer"><i aria-hidden="true">i</i> Это макет: реальный сайт не сканируется, ключи API не используются.</p>
+          <button class="primary-action" type="submit"><span>Начать анализ</span><b aria-hidden="true">→</b></button>
+          <p class="demo-disclaimer"><i aria-hidden="true">i</i> До 50 публичных страниц за запуск. Не используйте сервис для закрытых или чужих персональных данных.</p>
         </form>
         <aside class="panel-aside">
-          <span class="aside-label">Будущие подключения</span>
-          <div class="integration-pill"><i class="apify-icon">A</i><div><strong>Apify</strong><span>Сбор страниц</span></div><b>Ожидает</b></div>
-          <div class="integration-pill"><i class="router-icon">O</i><div><strong>OpenRouter</strong><span>Доступ к LLM</span></div><b>Ожидает</b></div>
-          <div class="integration-pill"><i class="vercel-icon">V</i><div><strong>Vercel</strong><span>Сервер и сайт</span></div><b class="ready">Готово</b></div>
+          <span class="aside-label">Система</span>
+          <div class="integration-pill"><i class="apify-icon">A</i><div><strong>Apify</strong><span>Website Content Crawler</span></div><b class="ready">Готово</b></div>
+          <div class="integration-pill"><i class="router-icon">O</i><div><strong>OpenRouter</strong><span>DeepSeek V4 Flash</span></div><b class="ready">Готово</b></div>
+          <div class="integration-pill"><i class="vercel-icon">V</i><div><strong>Vercel</strong><span>Защищённый API</span></div><b class="ready">Готово</b></div>
         </aside>
       </section>
 
-      <section class="demo-progress" id="demo-progress" aria-live="polite" hidden>
-        <div class="progress-head"><div><span class="pulse"></span><strong>Демонстрационный анализ</strong></div><span id="progress-percent">0%</span></div>
-        <div class="progress-track"><i id="progress-bar"></i></div>
-        <div class="progress-steps"><span data-step="1">Проверяем URL</span><span data-step="2">Собираем страницы</span><span data-step="3">Строим структуру</span></div>
+      <section class="analysis-error" id="analysis-error" role="alert" hidden>
+        <strong>Анализ не завершён</strong><p id="analysis-error-text"></p><button type="button" id="retry-analysis">Попробовать снова</button>
       </section>
 
-      <section class="demo-result" id="demo-result" hidden>
-        <div class="result-heading"><div><span class="result-badge">ДЕМО-РЕЗУЛЬТАТ</span><h2>Структура example.com</h2><p>Макет данных, которые вернёт LLM после подключения интеграций.</p></div><button type="button" class="ghost-button" id="reset-demo">Новый анализ</button></div>
-        <div class="result-grid">
-          <div class="tree-panel">
-            <div class="tree-panel-head"><strong>Карта страниц</strong><span>12 страниц · 3 уровня</span></div>
-            <div class="site-tree">
-              <details open><summary><i class="folder-icon"></i><span><strong>Главная</strong><small>example.com</small></span><b>12</b></summary>
-                <div class="tree-children">
-                  <details open><summary><i class="folder-icon"></i><span><strong>Продукты</strong><small>/products</small></span><b>4</b></summary><div class="tree-leaves"><a href="#">Продукт A <small>/products/a</small></a><a href="#">Продукт B <small>/products/b</small></a></div></details>
-                  <details><summary><i class="folder-icon"></i><span><strong>Блог</strong><small>/blog</small></span><b>5</b></summary><div class="tree-leaves"><a href="#">Все статьи <small>/blog</small></a><a href="#">Новость компании <small>/blog/news</small></a></div></details>
-                  <a class="tree-single" href="#"><i class="page-icon"></i><span><strong>О компании</strong><small>/about</small></span></a>
-                  <a class="tree-single" href="#"><i class="page-icon"></i><span><strong>Контакты</strong><small>/contacts</small></span></a>
-                </div>
-              </details>
-            </div>
-          </div>
-          <aside class="insight-panel">
-            <span class="aside-label">AI-обзор</span>
-            <h3>Корпоративный сайт с каталогом и контентным разделом.</h3>
-            <p>Основная структура логична и не превышает трёх уровней вложенности.</p>
-            <div class="insight-stats"><div><strong>3</strong><span>раздела</span></div><div><strong>12</strong><span>страниц</span></div><div><strong>2</strong><span>наблюдения</span></div></div>
-            <div class="notice"><b>↗</b><span><strong>Возможное улучшение</strong>Добавить отдельную страницу с ответами на частые вопросы.</span></div>
-          </aside>
+      <section class="demo-progress" id="demo-progress" aria-live="polite" hidden>
+        <div class="progress-head"><div><span class="pulse"></span><strong id="progress-title">Подготавливаем запуск</strong></div><span id="progress-percent">0%</span></div>
+        <div class="progress-track"><i id="progress-bar"></i></div>
+        <div class="progress-steps"><span data-step="1">Проверяем URL</span><span data-step="2">Apify собирает страницы</span><span data-step="3">DeepSeek анализирует</span><span data-step="4">Готовим отчёт</span></div>
+        <p class="progress-note" id="progress-note">Это может занять несколько минут. Не закрывайте страницу.</p>
+      </section>
+
+      <section class="analysis-result" id="analysis-result" hidden>
+        <div class="result-heading">
+          <div><span class="result-badge">ГОТОВЫЙ ОТЧЁТ</span><h2 id="result-title">Анализ сайта</h2><p id="result-summary"></p></div>
+          <div class="result-actions"><a id="source-link" href="#" target="_blank" rel="noopener noreferrer">Открыть сайт ↗</a><button type="button" class="ghost-button" id="reset-analysis">Новый анализ</button></div>
         </div>
+
+        <div class="audit-stats" id="audit-stats"></div>
+
+        <div class="report-tabs" role="tablist" aria-label="Разделы отчёта">
+          <button type="button" class="active" role="tab" aria-selected="true" data-report-tab="overview">Обзор</button>
+          <button type="button" role="tab" aria-selected="false" data-report-tab="structure">Структура</button>
+          <button type="button" role="tab" aria-selected="false" data-report-tab="content">Контент</button>
+          <button type="button" role="tab" aria-selected="false" data-report-tab="seo">SEO</button>
+        </div>
+
+        <div class="report-panel active" data-report-panel="overview">
+          <div class="overview-grid">
+            <article class="identity-card"><span class="aside-label">Назначение сайта</span><h3 id="identity-purpose"></h3><p id="identity-audience"></p><dl id="identity-meta"></dl></article>
+            <article class="conclusion-card"><span class="aside-label">Заключение DeepSeek</span><div class="score-ring" id="overall-score"><strong>0</strong><span>/100</span></div><p id="overall-verdict"></p><h4>Главные приоритеты</h4><ol id="top-priorities"></ol></article>
+          </div>
+          <div class="limitations" id="analysis-limitations"></div>
+        </div>
+
+        <div class="report-panel" data-report-panel="structure">
+          <div class="result-grid">
+            <div class="tree-panel"><div class="tree-panel-head"><strong>Карта обнаруженных страниц</strong><span id="tree-caption"></span></div><div class="site-tree dynamic-tree" id="site-tree"></div></div>
+            <aside class="audit-side" id="structure-audit"></aside>
+          </div>
+        </div>
+
+        <div class="report-panel" data-report-panel="content"><div class="section-audit" id="content-audit"></div></div>
+        <div class="report-panel" data-report-panel="seo"><div class="section-audit" id="seo-audit"></div></div>
+
+        <p class="report-notice" id="report-notice"></p>
       </section>
     </main>
 
-    <footer class="site-footer section-shell"><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>SiteScope</span></a><p>Учебный шаблон сервиса анализа структуры сайтов.</p><div><a href="/workflow.html">Процесс</a><a href="/about.html">О проекте</a></div><span>© 2026</span></footer>
+    <footer class="site-footer section-shell"><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>SiteScope</span></a><p>Учебный сервис анализа структуры, контента и SEO сайтов.</p><div><a href="/workflow.html">Процесс</a><a href="/about.html">О проекте</a></div><span>© 2026</span></footer>
   </body>
 </html>
