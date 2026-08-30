@@ -58,4 +58,9 @@ test('normalizes model titles and accidental ten-point scores', () => {
   assert.equal(analysis.content.score, 65);
   assert.equal(analysis.seo.score, 40);
   assert.equal(analysis.conclusion.overallScore, 60);
+  assert.ok(analysis.identity.purpose);
+  assert.equal(analysis.structure.recommendations.length, 2);
+  assert.equal(analysis.content.recommendations.length, 2);
+  assert.equal(analysis.seo.recommendations.length, 2);
+  assert.ok(analysis.conclusion.topPriorities.length >= 2);
 });

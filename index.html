@@ -3,123 +3,112 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="SiteScope — структура, контентный анализ и предварительный SEO-аудит сайта." />
-    <meta name="theme-color" content="#f5f7f2" />
+    <meta name="description" content="SiteScope — понятный анализ структуры, контента и SEO сайта с практическими рекомендациями." />
+    <meta name="theme-color" content="#f3f5ef" />
     <link rel="icon" href="data:," />
-    <title>SiteScope — карта сайта за несколько минут</title>
+    <title>SiteScope — анализ сайта и рекомендации</title>
     <link rel="stylesheet" href="/assets/styles.css" />
     <script src="/assets/app.js" defer></script>
   </head>
-  <body data-page="home">
-    <header class="site-header">
+  <body class="single-app" data-page="home">
+    <header class="app-header section-shell">
       <a class="brand" href="/" aria-label="SiteScope — на главную">
         <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
         <span>SiteScope</span>
       </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span></span><span></span><span></span><span class="sr-only">Открыть меню</span>
-      </button>
-      <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
-        <a class="active" href="/">Главная</a>
-        <a href="/analyzer.html">Анализатор</a>
-        <a href="/workflow.html">Как это работает</a>
-        <a href="/about.html">О проекте</a>
-      </nav>
-      <a class="header-cta" href="/analyzer.html">Начать анализ <span aria-hidden="true">↗</span></a>
+      <span class="private-badge"><i aria-hidden="true"></i> Приватный доступ</span>
     </header>
 
     <main>
-      <section class="hero section-shell">
-        <div class="eyebrow"><span></span> Учебный AI-проект · Work 2</div>
-        <h1>Увидьте сайт<br />как <em>систему.</em></h1>
-        <p class="hero-copy">Введите адрес сайта, чтобы собрать страницы, понять их назначение и представить связи в простой визуальной карте.</p>
+      <section class="app-hero section-shell" id="start">
+        <div class="app-hero-copy">
+          <div class="eyebrow"><span></span> Анализ сайта</div>
+          <h1>Понятно,<br />что <em>улучшать.</em></h1>
+          <p>Введите адрес сайта. Через несколько минут вы получите карту страниц, оценку содержания, предварительный SEO-разбор и конкретный план действий.</p>
 
-        <form class="url-form" data-url-form>
-          <label class="sr-only" for="home-url">Адрес сайта</label>
-          <span class="input-prefix" aria-hidden="true">⌁</span>
-          <input id="home-url" name="url" type="url" inputmode="url" placeholder="https://example.com" required />
-          <button type="submit">Построить карту <span aria-hidden="true">→</span></button>
-        </form>
-        <p class="form-note">До 50 публичных страниц · Apify + DeepSeek через OpenRouter.</p>
-
-        <div class="hero-meta" aria-label="Особенности проекта">
-          <span><b>01</b> Карта страниц</span>
-          <span><b>02</b> AI-анализ</span>
-          <span><b>03</b> Понятный результат</span>
-        </div>
-
-        <div class="map-preview" aria-label="Пример карты сайта">
-          <div class="map-toolbar">
-            <div><span class="status-dot"></span> example.com</div>
-            <span>12 страниц · 3 уровня</span>
-          </div>
-          <div class="map-canvas">
-            <div class="map-orbit orbit-one"></div>
-            <div class="map-orbit orbit-two"></div>
-            <div class="map-node node-root"><small>Главная</small><strong>example.com</strong></div>
-            <div class="map-line line-a"></div>
-            <div class="map-line line-b"></div>
-            <div class="map-line line-c"></div>
-            <div class="map-node node-a"><small>Раздел</small><strong>Продукты</strong><span>4 страницы</span></div>
-            <div class="map-node node-b"><small>Раздел</small><strong>Блог</strong><span>5 страниц</span></div>
-            <div class="map-node node-c"><small>Страница</small><strong>О компании</strong><span>1 страница</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="benefits section-shell">
-        <div class="section-heading">
-          <div><span class="section-number">01</span><span class="kicker">Что вы получите</span></div>
-          <h2>От списка ссылок<br />к ясной картине.</h2>
-        </div>
-        <div class="benefit-grid">
-          <article class="benefit-card featured">
-            <span class="card-index">A</span>
-            <div class="mini-tree" aria-hidden="true">
-              <i></i><i></i><i></i><i></i><i></i>
+          <form class="analysis-form app-analysis-form" id="analysis-form">
+            <label for="analysis-url">Адрес сайта</label>
+            <div class="single-input-row">
+              <span aria-hidden="true">https://</span>
+              <input id="analysis-url" name="url" type="text" inputmode="url" autocomplete="url" placeholder="example.com" required />
+              <button class="primary-action" type="submit"><span>Анализировать</span><b aria-hidden="true">→</b></button>
             </div>
-            <h3>Структура страниц</h3>
-            <p>Иерархия разделов с адресами, названиями и уровнем вложенности.</p>
-            <a href="/analyzer.html">Открыть пример <span aria-hidden="true">→</span></a>
-          </article>
-          <article class="benefit-card">
-            <span class="card-index">B</span>
-            <div class="metric"><strong>3×</strong><span>направления<br />анализа</span></div>
-            <h3>AI-аудит</h3>
-            <p>Модель объясняет назначение сайта и оценивает структуру, содержание и SEO.</p>
-            <a href="/workflow.html">Посмотреть процесс <span aria-hidden="true">→</span></a>
-          </article>
-          <article class="benefit-card dark-card">
-            <span class="card-index">C</span>
-            <div class="signal-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-            <h3>Полезные наблюдения</h3>
-            <p>Отдельно показаны глубина структуры, типы страниц и возможные пробелы.</p>
-            <a href="/about.html">О проекте <span aria-hidden="true">→</span></a>
-          </article>
+            <p><i aria-hidden="true">✓</i> Анализируются только открытые страницы. Данные используются для формирования этого отчёта.</p>
+          </form>
+
+          <div class="result-promises" aria-label="Содержание отчёта">
+            <span>Структура</span><span>Контент</span><span>SEO</span><span>Рекомендации</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-glow"></div>
+          <div class="visual-grid"></div>
+          <div class="visual-orbit orbit-large"><i></i></div>
+          <div class="visual-orbit orbit-small"><i></i></div>
+          <div class="visual-center"><span></span><b>site</b><small>готов к анализу</small></div>
+          <div class="visual-card visual-card-a"><i></i><span><b>Структура</b><small>страницы и связи</small></span></div>
+          <div class="visual-card visual-card-b"><i></i><span><b>Содержание</b><small>темы и ясность</small></span></div>
+          <div class="visual-card visual-card-c"><i></i><span><b>SEO</b><small>точки роста</small></span></div>
         </div>
       </section>
 
-      <section class="process-strip">
-        <div class="section-shell">
-          <span>URL пользователя</span><i>→</i><span>Apify Actor</span><i>→</i><span>OpenRouter</span><i>→</i><span>LLM-анализ</span><i>→</i><span>Карта сайта</span>
+      <section class="analysis-error section-shell" id="analysis-error" role="alert" hidden>
+        <div><span aria-hidden="true">!</span><div><strong>Не удалось завершить анализ</strong><p id="analysis-error-text"></p></div></div>
+        <button type="button" id="retry-analysis">Попробовать снова</button>
+      </section>
+
+      <section class="waiting-screen section-shell" id="demo-progress" aria-live="polite" hidden>
+        <div class="waiting-animation" aria-hidden="true">
+          <div class="waiting-rings"><i></i><i></i><i></i></div>
+          <div class="waiting-core"><span></span><b id="waiting-domain">site</b></div>
+          <span class="floating-dot dot-one"></span><span class="floating-dot dot-two"></span><span class="floating-dot dot-three"></span>
+        </div>
+        <div class="waiting-copy">
+          <span class="waiting-label">Идёт анализ</span>
+          <h2 id="progress-title">Изучаем сайт</h2>
+          <p id="progress-note">Собираем материал и готовим понятный отчёт. Можно оставить эту вкладку открытой.</p>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <div class="waiting-meta"><span id="progress-percent">0%</span><span>Обычно 1–3 минуты</span></div>
+          <div class="progress-steps" aria-hidden="true"><span data-step="1">Адрес</span><span data-step="2">Страницы</span><span data-step="3">Выводы</span><span data-step="4">Отчёт</span></div>
         </div>
       </section>
 
-      <section class="cta-section section-shell">
-        <div>
-          <span class="section-number">02</span>
-          <p>Запустите реальный обход публичного сайта</p>
+      <section class="analysis-result section-shell" id="analysis-result" hidden>
+        <div class="result-heading single-result-heading">
+          <div><span class="result-badge">ОТЧЁТ ГОТОВ</span><h2 id="result-title">Анализ сайта</h2><p id="result-summary"></p></div>
+          <div class="result-actions"><a id="source-link" href="#" target="_blank" rel="noopener noreferrer">Открыть сайт ↗</a><button type="button" class="ghost-button" id="reset-analysis">Новый анализ</button></div>
         </div>
-        <h2>Готовы разобрать<br />свой сайт?</h2>
-        <a class="round-link" href="/analyzer.html" aria-label="Перейти к анализатору"><span>Перейти</span><b>↗</b></a>
+
+        <div class="audit-stats" id="audit-stats"></div>
+
+        <div class="overview-grid single-overview">
+          <article class="identity-card"><span class="aside-label">О сайте</span><h3 id="identity-purpose"></h3><p id="identity-audience"></p><dl id="identity-meta"></dl></article>
+          <article class="conclusion-card"><span class="aside-label">Итоговая оценка</span><div class="score-ring" id="overall-score"><strong>0</strong><span>/100</span></div><p id="overall-verdict"></p><h4>Главные приоритеты</h4><ol id="top-priorities"></ol></article>
+        </div>
+
+        <section class="action-plan-card">
+          <div class="section-title-row"><div><span class="aside-label">План действий</span><h3>Что стоит сделать в первую очередь</h3></div><span class="plan-count" id="plan-count"></span></div>
+          <div class="action-plan" id="action-plan"></div>
+        </section>
+
+        <section class="audit-sections">
+          <div class="section-title-row"><div><span class="aside-label">Подробный разбор</span><h3>Три стороны сайта</h3></div></div>
+          <article class="section-audit" id="structure-audit"></article>
+          <article class="section-audit" id="content-audit"></article>
+          <article class="section-audit" id="seo-audit"></article>
+        </section>
+
+        <details class="site-map-card">
+          <summary><span><small>Карта сайта</small><strong>Посмотреть найденные страницы</strong></span><b id="tree-caption"></b></summary>
+          <div class="site-tree dynamic-tree" id="site-tree"></div>
+        </details>
+
+        <div class="limitations" id="analysis-limitations"></div>
+        <p class="report-notice" id="report-notice"></p>
       </section>
     </main>
 
-    <footer class="site-footer section-shell">
-      <a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>SiteScope</span></a>
-      <p>Учебный сервис анализа структуры, контента и SEO сайтов.</p>
-      <div><a href="/workflow.html">Процесс</a><a href="/about.html">О проекте</a></div>
-      <span>© 2026</span>
-    </footer>
+    <footer class="app-footer section-shell"><span>SiteScope · Work 2</span><p>Результат помогает выбрать приоритеты, но не заменяет технический SEO-аудит.</p><span>© 2026</span></footer>
   </body>
 </html>

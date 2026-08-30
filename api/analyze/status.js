@@ -23,6 +23,7 @@ export default async function handler(request, response) {
       finishedAt: run.finishedAt,
     });
   } catch (error) {
-    return response.status(502).json({ error: error.message || 'Не удалось получить состояние обхода.' });
+    console.error('Analysis status failed:', error);
+    return response.status(502).json({ error: 'Не удалось продолжить анализ. Попробуйте ещё раз через несколько минут.' });
   }
 }

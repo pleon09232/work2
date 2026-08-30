@@ -24,10 +24,10 @@ export default async function handler(request, response) {
 
     const items = await getCrawlItems(run.defaultDatasetId);
     const crawl = prepareCrawl(items, requestedUrl);
-    if (!crawl.pages.length) return response.status(422).json({ error: 'Actor не получил ни одной доступной страницы сайта.' });
+    if (!crawl.pages.length) return response.status(422).json({ error: 'Не удалось найти доступные страницы сайта.' });
 
     const llm = await analyzeWebsite(crawl, requestedUrl);
-    normalizeAnalysisOutput(llm.analysis, crawl.pages[0]?.title || new URL(requestedUrl).hostname);
+    normalizeAnalysisOutput(llm.analysis, crawl.pages[0]?.title || new URL(requestedUrl).hostname, crawl.facts, crawl.pages);
     return response.status(200).json({
       ok: true,
       siteUrl: requestedUrl,
@@ -41,6 +41,7 @@ export default async function handler(request, response) {
       notice: 'SEO-аудит предварительный: краулер не измеряет Core Web Vitals, позиции в поиске и серверную производительность.',
     });
   } catch (error) {
-    return response.status(502).json({ error: error.message || 'Не удалось подготовить анализ сайта.' });
+    console.error('Analysis result failed:', error);
+    return response.status(502).json({ error: 'Не удалось подготовить итоговый отчёт. Попробуйте запустить анализ ещё раз.' });
   }
 }

@@ -103,9 +103,24 @@
     }).join('')}</div>`;
   }
 
-  function renderAuditSection(section, includeTopics) {
+  function renderAuditSection(section, includeTopics, sectionName) {
     const topics = includeTopics && section.topics?.length ? `<div class="topic-list">${section.topics.map((topic) => `<span>${escapeHtml(topic)}</span>`).join('')}</div>` : '';
-    return `<div class="audit-hero"><div class="mini-score ${scoreClass(section.score)}"><strong>${section.score}</strong><span>/100</span></div><div><span class="aside-label">Оценка раздела</span><h3>${escapeHtml(section.verdict)}</h3></div></div>${topics}<div class="audit-columns"><article><h4>Сильные стороны</h4><ul class="check-list">${(section.strengths || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></article><article><h4>Что мешает</h4><ul class="issue-list">${(section.weaknesses || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></article></div><h4 class="recommendation-title">Рекомендации</h4>${renderRecommendations(section.recommendations)}`;
+    return `<div class="audit-hero"><div class="mini-score ${scoreClass(section.score)}"><strong>${section.score}</strong><span>/100</span></div><div><span class="aside-label">${escapeHtml(sectionName)}</span><h3>${escapeHtml(section.verdict)}</h3></div></div>${topics}<div class="audit-columns"><article><h4>Что уже хорошо</h4><ul class="check-list">${(section.strengths || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></article><article><h4>Что мешает</h4><ul class="issue-list">${(section.weaknesses || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></article></div><h4 class="recommendation-title">Рекомендации</h4>${renderRecommendations(section.recommendations)}`;
+  }
+
+  function renderActionPlan(analysis) {
+    const sectionNames = { structure: 'Структура', content: 'Контент', seo: 'SEO' };
+    const rank = { high: 0, medium: 1, low: 2 };
+    const recommendations = Object.entries(sectionNames)
+      .flatMap(([key, sectionName]) => (analysis[key]?.recommendations || []).map((item) => ({ ...item, sectionName })))
+      .sort((a, b) => (rank[a.priority] ?? 3) - (rank[b.priority] ?? 3))
+      .slice(0, 8);
+
+    document.querySelector('#plan-count').textContent = `${recommendations.length} шагов`;
+    document.querySelector('#action-plan').innerHTML = recommendations.map((item, index) => {
+      const link = safeUrl(item.evidenceUrl);
+      return `<article><span class="action-number">${String(index + 1).padStart(2, '0')}</span><div><div class="action-meta"><span class="priority ${escapeHtml(item.priority)}">${item.priority === 'high' ? 'Сначала' : item.priority === 'medium' ? 'Затем' : 'После'}</span><span>${escapeHtml(item.sectionName)}</span></div><h4>${escapeHtml(item.title)}</h4><p>${escapeHtml(item.details)}</p>${link !== '#' ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">Открыть связанную страницу ↗</a>` : ''}</div></article>`;
+    }).join('');
   }
 
   function renderTreeNode(node, isRoot = false) {
@@ -126,15 +141,10 @@
     const sourceLink = document.querySelector('#source-link');
     sourceLink.href = safeUrl(data.siteUrl);
 
-    const stats = [
-      [data.facts.pages, 'страниц'],
-      [data.facts.sections, 'разделов'],
-      [data.facts.maxDepth, 'уровней'],
-      [analysis.conclusion.overallScore, 'общая оценка'],
-    ];
+    const stats = [[data.facts.pages, 'страниц'], [data.facts.maxDepth, 'уровней'], [data.facts.thinPages, 'коротких страниц'], [analysis.conclusion.overallScore, 'оценка из 100']];
     document.querySelector('#audit-stats').innerHTML = stats.map(([value, label]) => `<article><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></article>`).join('');
 
-    document.querySelector('#identity-purpose').textContent = identity.purpose;
+    document.querySelector('#identity-purpose').textContent = identity.purpose || identity.summary;
     document.querySelector('#identity-audience').textContent = identity.audience;
     document.querySelector('#identity-meta').innerHTML = `<div><dt>Тип</dt><dd>${escapeHtml(identity.businessType)}</dd></div><div><dt>Язык</dt><dd>${escapeHtml(identity.language)}</dd></div><div><dt>Объём</dt><dd>${data.facts.totalWords.toLocaleString('ru-RU')} слов</dd></div>`;
 
@@ -147,9 +157,10 @@
 
     document.querySelector('#tree-caption').textContent = `${data.facts.pages} страниц · глубина ${data.facts.maxDepth}`;
     document.querySelector('#site-tree').innerHTML = renderTreeNode(data.tree, true);
-    document.querySelector('#structure-audit').innerHTML = renderAuditSection(analysis.structure, false);
-    document.querySelector('#content-audit').innerHTML = renderAuditSection(analysis.content, true);
-    document.querySelector('#seo-audit').innerHTML = renderAuditSection(analysis.seo, false);
+    document.querySelector('#structure-audit').innerHTML = renderAuditSection(analysis.structure, false, 'Структура');
+    document.querySelector('#content-audit').innerHTML = renderAuditSection(analysis.content, true, 'Контент');
+    document.querySelector('#seo-audit').innerHTML = renderAuditSection(analysis.seo, false, 'SEO');
+    renderActionPlan(analysis);
     document.querySelector('#report-notice').textContent = data.notice;
   }
 
@@ -158,12 +169,12 @@
       const response = await fetch(`/api/analyze/status?runId=${encodeURIComponent(runId)}`, { cache: 'no-store' });
       const status = await readJson(response);
       if (status.status === 'SUCCEEDED') return status;
-      if (TERMINAL_RUN_STATUSES.has(status.status)) throw new Error(`Apify завершил обход со статусом ${status.status}. Попробуйте меньшую глубину или другой сайт.`);
+      if (TERMINAL_RUN_STATUSES.has(status.status)) throw new Error('Не удалось обработать страницы этого сайта. Проверьте адрес или попробуйте другой сайт.');
       const percent = Math.min(68, 22 + attempt * 2);
-      setProgress(percent, 2, 'Apify собирает страницы', `Статус Actor: ${status.status}. Обычно обход занимает от нескольких секунд до пары минут.`);
+      setProgress(percent, 2, 'Изучаем страницы', 'Находим важные разделы, тексты и связи между страницами.');
       await sleep(3000);
     }
-    throw new Error('Превышено время ожидания Apify. Попробуйте запустить анализ ещё раз.');
+    throw new Error('Анализ занял больше обычного. Попробуйте запустить его ещё раз немного позже.');
   }
 
   analysisForm.addEventListener('submit', async (event) => {
@@ -176,7 +187,9 @@
     errorSection.hidden = true;
     resultSection.hidden = true;
     progress.hidden = false;
-    setProgress(8, 1, 'Проверяем адрес сайта', 'Подготавливаем безопасный серверный запуск.');
+    const waitingDomain = document.querySelector('#waiting-domain');
+    if (waitingDomain) waitingDomain.textContent = rawUrl.replace(/^https?:\/\//i, '').split('/')[0].slice(0, 24);
+    setProgress(8, 1, 'Проверяем адрес', 'Убеждаемся, что сайт доступен для анализа.');
     progress.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     try {
@@ -185,17 +198,17 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: rawUrl, depth: selectedDepth }),
       }));
-      setProgress(22, 2, 'Actor запущен', 'Apify обходит страницы и извлекает содержимое в Markdown.');
+      setProgress(22, 2, 'Изучаем сайт', 'Находим страницы и собираем материал для отчёта.');
       await pollRun(start.runId);
 
-      setProgress(76, 3, 'DeepSeek анализирует данные', 'Модель оценивает структуру, контент и SEO-привлекательность.');
+      setProgress(76, 3, 'Готовим выводы', 'Сопоставляем наблюдения и выбираем самые полезные рекомендации.');
       const result = await readJson(await fetch('/api/analyze/result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ runId: start.runId, url: start.url }),
       }));
 
-      setProgress(96, 4, 'Формируем интерактивный отчёт', 'Строим карту страниц и разделы анализа.');
+      setProgress(96, 4, 'Собираем отчёт', 'Оформляем результаты в удобном для чтения виде.');
       renderResult(result);
       setProgress(100, 4, 'Готово', 'Отчёт сформирован.');
       await sleep(350);

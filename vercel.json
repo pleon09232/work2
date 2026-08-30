@@ -1,6 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/analyzer", "destination": "/", "permanent": false },
+    { "source": "/analyzer.html", "destination": "/", "permanent": false },
+    { "source": "/workflow", "destination": "/", "permanent": false },
+    { "source": "/workflow.html", "destination": "/", "permanent": false },
+    { "source": "/about", "destination": "/", "permanent": false },
+    { "source": "/about.html", "destination": "/", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)",

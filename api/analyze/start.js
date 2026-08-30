@@ -26,6 +26,7 @@ export default async function handler(request, response) {
     });
   } catch (error) {
     const isInputError = /URL|адрес|IP|HTTP|Локальные/i.test(error.message);
-    return response.status(isInputError ? 400 : 502).json({ error: error.message || 'Не удалось запустить сбор сайта.' });
+    if (!isInputError) console.error('Analysis start failed:', error);
+    return response.status(isInputError ? 400 : 502).json({ error: isInputError ? error.message : 'Не удалось начать анализ. Попробуйте ещё раз через несколько минут.' });
   }
 }
