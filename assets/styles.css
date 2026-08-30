@@ -276,3 +276,172 @@ h1 em, h2 em { font-family: var(--serif); font-weight: 500; color: var(--orange)
 @media (max-width: 680px) {
   .app-header { height: 70px; }.private-badge { font-size: 7px; }.app-hero { min-height: auto; padding-top: 55px; padding-bottom: 65px; }.app-hero h1 { font-size: 55px; }.app-hero-copy > p { font-size: 14px; }.single-input-row { grid-template-columns: auto 1fr; }.single-input-row .primary-action { grid-column: 1/-1; width: 100%; margin-top: 3px; min-width: 0; }.result-promises { margin-top: 22px; }.hero-visual { border-radius: 22px; }.visual-card { min-width: 145px; padding: 10px; }.visual-card-a { left: 3%; }.visual-card-b { right: 2%; }.visual-center { width: 116px; height: 116px; }.waiting-screen { width: calc(100% - 20px); min-height: 650px; padding: 38px 20px; border-radius: 22px; }.waiting-animation { min-height: 280px; }.waiting-rings i:nth-child(3) { width: 280px; height: 280px; }.waiting-rings i:nth-child(2) { width: 220px; height: 220px; }.waiting-rings i:nth-child(1) { width: 150px; height: 150px; }.waiting-core { width: 128px; height: 128px; }.waiting-copy h2 { font-size: 43px; }.single-result-heading { align-items: flex-start; }.single-result-heading h2 { font-size: 49px; }.action-plan { grid-template-columns: 1fr; }.action-plan article,.action-plan article:nth-child(even) { padding: 22px 0; border-right: 0; }.audit-sections .recommendation-list { grid-template-columns: 1fr; }.site-map-card > summary,.site-map-card .site-tree { padding-left: 20px; padding-right: 20px; }.app-footer { grid-template-columns: 1fr auto; }.app-footer p { display: none; }
 }
+
+/* Readability and compact-layout pass */
+body { font-size: 16px; line-height: 1.6; }
+.single-app .section-shell { width: min(1280px, calc(100% - 56px)); }
+.app-header { height: 74px; }
+.brand { font-size: 21px; }
+.private-badge { padding: 9px 14px; font-size: 12px; line-height: 1.35; }
+.eyebrow { font-size: 12px; line-height: 1.4; }
+
+.app-hero { min-height: auto; grid-template-columns: minmax(0,1.08fr) minmax(390px,.82fr); gap: clamp(38px,5vw,72px); padding-top: 46px; padding-bottom: 58px; }
+.app-hero h1 { margin: 20px 0 24px; font-size: clamp(58px,6.5vw,92px); }
+.app-hero-copy > p { font-size: 18px; line-height: 1.7; }
+.app-analysis-form { margin-top: 30px; }
+.app-analysis-form > label { font-size: 15px; }
+.single-input-row > span { font-size: 14px; }
+.single-input-row input { font-size: 17px; }
+.single-input-row .primary-action { font-size: 15px; }
+.app-analysis-form > p { font-size: 14px; line-height: 1.6; }
+.result-promises { margin-top: 22px; }
+.result-promises span { padding: 8px 12px; font-size: 12px; }
+.hero-visual { width: 100%; max-width: 540px; justify-self: end; }
+.visual-center small { font-size: 10px; }
+.visual-card { min-width: 190px; }
+.visual-card b { font-size: 14px; }
+.visual-card small { font-size: 11px; }
+
+.waiting-screen { min-height: 500px; margin-top: 28px; margin-bottom: 54px; gap: 44px; padding: 44px clamp(28px,5vw,64px); }
+.waiting-animation { min-height: 340px; }
+.waiting-label { font-size: 12px; }
+.waiting-copy h2 { margin: 12px 0; }
+.waiting-copy > p { min-height: 0; font-size: 17px; line-height: 1.7; }
+.waiting-copy .progress-track { margin-top: 26px; }
+.waiting-meta { font-size: 12px; }
+.waiting-screen .progress-steps { margin-top: 28px; font-size: 13px; }
+
+.single-app .analysis-error strong { font-size: 17px; }
+.single-app .analysis-error p { font-size: 15px; }
+.single-app .analysis-error button { font-size: 14px; }
+.single-app .analysis-result { padding-top: 58px; padding-bottom: 62px; }
+.single-result-heading { padding-bottom: 28px; }
+.result-badge { font-size: 12px; }
+.single-result-heading > div:first-child > p { max-width: 850px; font-size: 18px; line-height: 1.7; }
+.result-actions > a, .ghost-button { font-size: 14px; }
+.single-app .audit-stats { margin-top: 20px; }
+.single-app .audit-stats article { padding: 21px 24px; }
+.single-app .audit-stats span { font-size: 12px; line-height: 1.45; }
+
+.single-overview > article { min-height: 0; padding: 30px; }
+.single-app .aside-label { font-size: 12px; line-height: 1.4; }
+.single-overview .conclusion-card { color: var(--ink); }
+.single-overview .conclusion-card .aside-label { color: #66746b; }
+.single-overview .conclusion-card > p { color: #445149; }
+.single-overview .conclusion-card li { color: #435048; border-color: rgba(23,35,29,.12); }
+.single-overview .conclusion-card .score-ring span { color: #66746b; }
+.identity-card h3 { margin: 16px 0 12px; font-size: 32px; }
+.identity-card > p { font-size: 17px; line-height: 1.7; }
+.identity-card dl { margin-top: 22px; }
+.identity-card dt { font-size: 12px; }
+.identity-card dd { font-size: 15px; }
+.conclusion-card > p { font-size: 17px; line-height: 1.7; }
+.conclusion-card h4 { margin-top: 20px; font-size: 17px; }
+.conclusion-card li { padding: 10px 0; font-size: 15px; line-height: 1.6; }
+.score-ring { margin: 18px 0; }
+.score-ring span, .mini-score span { font-size: 12px; }
+
+.action-plan-card { padding: clamp(28px,3vw,38px); }
+.section-title-row { margin-bottom: 22px; }
+.plan-count { font-size: 12px; }
+.action-plan article { grid-template-columns: 38px 1fr; gap: 12px; padding-top: 21px; padding-bottom: 21px; }
+.action-number { font-size: 13px; }
+.action-meta { font-size: 11px; line-height: 1.5; }
+.priority { padding: 6px 9px; font-size: 11px; line-height: 1.25; }
+.action-plan h4 { margin: 10px 0 7px; font-size: 18px; line-height: 1.35; }
+.action-plan p { font-size: 16px; line-height: 1.7; }
+.action-plan a { margin-top: 11px; font-size: 13px; line-height: 1.45; }
+
+.audit-sections { margin-top: 54px; }
+.audit-sections > .section-title-row { padding-bottom: 18px; }
+.audit-sections > .section-audit { padding: clamp(26px,3vw,36px); }
+.audit-hero { margin-bottom: 22px; }
+.audit-sections .audit-hero h3 { font-size: clamp(24px,2.4vw,31px); }
+.audit-columns h4, .recommendation-title { font-size: 17px; }
+.recommendation-title { margin-top: 24px; }
+.check-list li, .issue-list li { padding-top: 10px; padding-bottom: 10px; font-size: 16px; line-height: 1.6; }
+.topic-list span { font-size: 12px; }
+.recommendation-list { gap: 12px; }
+.recommendation-list article { grid-template-columns: 92px 1fr; gap: 16px; padding: 18px; }
+.recommendation-list h5 { margin-bottom: 7px; font-size: 17px; line-height: 1.35; }
+.recommendation-list p { font-size: 15px; line-height: 1.7; }
+.recommendation-list a { font-size: 13px; line-height: 1.45; }
+
+.site-map-card > summary { padding-top: 22px; padding-bottom: 22px; }
+.site-map-card > summary small, .site-map-card > summary b { font-size: 12px; line-height: 1.45; }
+.site-map-card > summary strong { font-size: 20px; }
+.site-map-card .site-tree { padding-top: 22px; padding-bottom: 26px; }
+.site-tree strong { font-size: 15px; }
+.site-tree small, .site-tree summary > b { font-size: 12px; line-height: 1.45; }
+.single-app .limitations { padding: 20px 24px; }
+.limitations strong { font-size: 16px; }
+.limitations ul { font-size: 15px; line-height: 1.7; }
+.single-app .report-notice { font-size: 14px; line-height: 1.65; }
+.app-footer { min-height: 82px; padding-top: 20px; padding-bottom: 20px; font-size: 12px; line-height: 1.5; }
+.logout-chip button { font-size: 13px; }
+
+.login-index, .login-form label { font-size: 13px; }
+.login-index { margin-bottom: 32px; }
+.login-card > p, .login-intro p { font-size: 17px; }
+.password-field input { font-size: 16px; }
+.password-field button { font-size: 13px; }
+.login-submit { font-size: 15px; }
+.login-security { margin-top: 28px; font-size: 14px; line-height: 1.6; }
+.login-meta { font-size: 12px; }
+
+@media (max-width: 980px) {
+  .single-app .section-shell { width: min(100% - 40px, 760px); }
+  .app-hero { grid-template-columns: 1fr; padding-top: 44px; gap: 36px; }
+  .hero-visual { justify-self: center; }
+  .waiting-screen { gap: 12px; }
+  .waiting-animation { min-height: 300px; }
+}
+
+@media (max-width: 680px) {
+  .single-app .section-shell { width: calc(100% - 28px); }
+  .app-header { height: 68px; }
+  .brand { font-size: 19px; }
+  .private-badge { padding: 7px 9px; font-size: 10px; }
+  .app-hero { padding-top: 38px; padding-bottom: 44px; }
+  .app-hero h1 { font-size: clamp(48px,15vw,58px); }
+  .app-hero-copy > p { font-size: 17px; }
+  .app-analysis-form > label { font-size: 14px; }
+  .single-input-row > span { font-size: 13px; }
+  .single-input-row input { font-size: 16px; }
+  .app-analysis-form > p { font-size: 13px; }
+  .result-promises span { font-size: 11px; }
+  .visual-card { min-width: 158px; }
+  .visual-card b { font-size: 12px; }
+  .visual-card small { font-size: 10px; }
+  .waiting-screen { min-height: 0; margin-bottom: 38px; padding-top: 28px; padding-bottom: 32px; }
+  .waiting-animation { min-height: 260px; }
+  .waiting-copy > p { font-size: 16px; }
+  .waiting-meta, .waiting-screen .progress-steps { font-size: 11px; }
+  .single-app .analysis-result { padding-top: 42px; padding-bottom: 48px; }
+  .single-result-heading { padding-bottom: 22px; }
+  .single-result-heading h2 { font-size: 45px; }
+  .single-result-heading > div:first-child > p { font-size: 17px; }
+  .single-app .audit-stats article { padding: 18px; }
+  .single-app .audit-stats strong { font-size: 30px; }
+  .single-overview > article { padding: 24px; }
+  .identity-card h3 { font-size: 28px; }
+  .identity-card dl { grid-template-columns: 1fr; }
+  .action-plan-card { padding: 25px 22px; }
+  .section-title-row { align-items: flex-start; }
+  .section-title-row h3 { font-size: 31px; }
+  .action-plan article { grid-template-columns: 32px 1fr; }
+  .audit-sections { margin-top: 42px; }
+  .audit-hero { grid-template-columns: 70px 1fr; gap: 15px; }
+  .audit-sections .audit-hero h3 { font-size: 23px; }
+  .audit-columns article { padding: 17px; }
+  .check-list li, .issue-list li { font-size: 15px; }
+  .recommendation-list article { grid-template-columns: 1fr; }
+  .site-map-card > summary { align-items: flex-start; padding-left: 20px; padding-right: 20px; }
+  .site-map-card > summary b { text-align: right; }
+  .site-map-card .site-tree { padding-left: 18px; padding-right: 18px; }
+  .tree-children { margin-left: 5px; padding-left: 8px; }
+  .dynamic-tree small { max-width: 190px; }
+  .app-footer { font-size: 11px; }
+  .login-intro { min-height: 390px; }
+  .login-panel { padding-top: 48px; padding-bottom: 48px; }
+}
